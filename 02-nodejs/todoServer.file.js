@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const path = require('path');
 
 const app = express();
 
@@ -88,6 +89,14 @@ app.delete("/todos/:id", (req, res) => {
       })
     }
   });
+});
+
+app.use('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.use((req, res) => {
+  res.status(404).send();
 });
 
 app.listen(3000);
